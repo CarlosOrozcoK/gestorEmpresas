@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { dbConnection } from './mongo.js';
 import limiter from '../src/middlewares/validar-cant-peticiones.js';
-
+import { createAdminUser } from './adminSeeder.js';
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -18,15 +18,15 @@ const middlewares = (app) => {
 }
 
 const routes = (app) => {
-  
 }
 
 const conectarDB = async () => {
     try {
         await dbConnection();
-        console.log('Succesful connecting to database!')
+        console.log('Successful connection to database!');
+        await createAdminUser(); 
     } catch (error) {
-        console.log('Error connecting to database!');
+        console.log('Error connecting to database!', error);
         process.exit(1);
     }
 }
@@ -37,7 +37,7 @@ export const initServer = async () => {
 
     try {
         middlewares(app);
-        conectarDB();
+        await conectarDB(); 
         routes(app);
         app.listen(port);
         console.log(`Server running on port ${port}!`);
