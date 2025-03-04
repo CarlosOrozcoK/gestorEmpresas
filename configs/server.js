@@ -7,6 +7,8 @@ import morgan from 'morgan';
 import { dbConnection } from './mongo.js';
 import limiter from '../src/middlewares/validar-cant-peticiones.js';
 import { createAdminUser } from './adminSeeder.js';
+import empresaRoutes from "../src/empresas/empresa.routes.js";
+
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -18,7 +20,8 @@ const middlewares = (app) => {
 }
 
 const routes = (app) => {
-}
+    app.use("/gestorEmpresas/v1/empresas", empresaRoutes); 
+ }
 
 const conectarDB = async () => {
     try {
