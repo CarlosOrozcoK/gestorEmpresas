@@ -1,16 +1,16 @@
-import User from "../src/users/user.model.js";
-const argon2 = require("argon2");
+import User from "../src/users/user.model.js"; 
+import argon2 from "argon2";
 
-const createAdminUser = async () => {
+export async function createAdminUser() { 
     try {
-        const existingAdmin = await User.findOne({ role: "admin" });
+        const existingAdmin = await User.findOne({ role: "ADMIN" }); 
         if (!existingAdmin) {
             const hashedPassword = await argon2.hash("39679413"); 
             const admin = new User({
                 name: "Carlos Orozco",
                 email: "corozco2019392@gmail.com",
                 password: hashedPassword,
-                role: "admin",
+                role: "ADMIN",
             });
 
             await admin.save();
@@ -19,7 +19,4 @@ const createAdminUser = async () => {
     } catch (error) {
         console.error("Error al crear el administrador:", error);
     }
-};
-
-export { createAdminUser };
-
+}
