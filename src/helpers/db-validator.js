@@ -1,8 +1,5 @@
-import Role from '../role/role.model.js';
+import Role from '../roles/role.model.js';
 import User from '../users/user.model.js';
-import Product from "../products/product.model.js";
-import Category from '../categories/category.model.js';
-import Factura from '../facturas/factura.model.js';
 
 export const esRoleValido = async (role = ' ') => {
     const existeRol = await Role.findOne({ role });
