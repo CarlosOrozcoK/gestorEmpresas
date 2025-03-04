@@ -1,5 +1,5 @@
 'use strict';
-
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import { dbConnection } from './mongo.js';
 import limiter from '../src/middlewares/validar-cant-peticiones.js';
 import { createAdminUser } from './adminSeeder.js';
+import authRoutes from "../src/auth/auth.routes.js";
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ const middlewares = (app) => {
 }
 
 const routes = (app) => {
+    app.use("/gestorEmpresas/v1/auth", authRoutes);
 }
 
 const conectarDB = async () => {
