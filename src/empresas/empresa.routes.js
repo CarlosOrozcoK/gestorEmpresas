@@ -23,7 +23,7 @@ router.post(
     "/",
     [
         validarJWT,
-        tieneRole("ADMIN_ROLE"),
+        tieneRole("ADMIN"),
         check("nombre", "¡El nombre es obligatorio!").not().isEmpty(),
         check("nivelImpacto", "¡El nivel de impacto debe ser Alto, Medio o Bajo!").isIn(["Alto", "Medio", "Bajo"]),
         check("anosTrayectoria", "¡Los años de trayectoria deben ser un número positivo!").isInt({ min: 0 }),
@@ -39,7 +39,7 @@ router.put(
     "/:id",
     [
         validarJWT,
-        tieneRole("ADMIN_ROLE"),
+        tieneRole("ADMIN"),
         check("id", "¡El ID de la empresa no es válido!").isMongoId(),
         validarCampos
     ],

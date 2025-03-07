@@ -14,7 +14,7 @@ export const validarJWT = async (req, res, next) => {
 
     try {
 
-        const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+        const { uid } = jwt.verify(token, process.env.SECRETPRIVATEKEY);
 
         const usuario = await Usuario.findById(uid);
 
